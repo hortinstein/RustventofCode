@@ -3,10 +3,12 @@ use std::process;
 
 use rustventofcode;
 use common::Config;
-
+use aoc_day1;
 fn main() {
     let args: Vec<String> = env::args().collect();
     let mut args_ref: Vec<&str> = Vec::new();
+    
+    //put the args in an iterator
     for arg in args.iter(){
         args_ref.push(&arg);
     }
@@ -15,5 +17,10 @@ fn main() {
         println!("Problem parsing arguments: {}", err);
         process::exit(1);
     });
+    match config.day{
+        1 => aoc_day1::run(config).unwrap(),
+        _ => print!("day not yet supported"),
+    }
+    
 }
 
