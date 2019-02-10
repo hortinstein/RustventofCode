@@ -1,0 +1,19 @@
+[[package]]
+name = "aoc_day1"
+version = "0.1.0"
+dependencies = [
+ "common 0.1.0",
+]
+
+[[package]]
+name = "common"
+version = "0.1.0"
+
+[[package]]
+name = "rustventofcode"
+version = "0.1.0"
+dependencies = [
+ "aoc_day1 0.1.0",
+ "common 0.1.0",
+]
+

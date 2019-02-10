@@ -1,0 +1,9 @@
+[package]
+name = "rustventofcode"
+version = "0.1.0"
+authors = ["Alex Hortin <hortinstein@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+common = {path = "./common"}
+aoc_day1 = { path = "./day_libs/aoc_day1" }
