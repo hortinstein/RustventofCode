@@ -58,7 +58,7 @@ mod tests {
         let input = "-1\n0\n1\n3"; //4
         dbg!(input);
         let result = super::part2(input).unwrap();
-        assert_eq!(0,result);
+        assert_eq!(-1,result);
     }
 
 }
