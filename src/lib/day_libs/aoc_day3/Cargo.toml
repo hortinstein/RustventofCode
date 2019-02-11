@@ -1,0 +1,7 @@
+[package]
+name = "aoc_day3"
+version = "0.1.0"
+authors = ["horti"]
+edition = "2018"
+
+[dependencies]
