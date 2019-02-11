@@ -1,7 +1,6 @@
 
 use common::Config;
 use std::collections::HashSet;
-use std::io::{self, Read, Write};
 
 type Result<T> = ::std::result::Result<T, Box<::std::error::Error>>;
 
@@ -32,20 +31,19 @@ fn part2(input: &str) -> Result<i32> {
             seen.insert(freq);
         }
     }
-    Err(From::from("never found a repeat"))
+    //Err(From::from("never found a repeat"))
 }
 
 
 pub fn run(config: Config) -> Result<()> {
     println!("Day1:");
-    part1(&(config.contents));
-    part2(&(config.contents)); 
+    part1(&(config.contents))?;
+    part2(&(config.contents))?; 
     Ok(())
 }
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     #[test]
     fn part1() {
         let input = "-1\n0\n2\n3"; //4

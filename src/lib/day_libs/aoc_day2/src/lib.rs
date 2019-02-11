@@ -1,45 +1,47 @@
 
 use common::Config;
-use std::collections::HashSet;
+use std::collections::HashMap;
 use std::io::{self, Read, Write};
 
 type Result<T> = ::std::result::Result<T, Box<::std::error::Error>>;
 
 fn part1(input: &str) -> Result<i32> {
-    let mut num:i32 = 0;
+    let (mut twos, mut threes) = (0, 0);
     for line in input.lines(){
-        let change: i32 = line.parse()?;
-        num+=change;
+        //creates a hashmap with ascii a to z  
+        let mut char_count = HashMap::new();
+        char_count.extend((b'a'..=b'z').map(|c| (c as char,0)));
+        //iterate through all of the letters
+        for b in line.chars(){
+            //increment the char count
+            *char_count.get_mut(&b).unwrap() = char_count[&b] + 1;
+        }
+        //check to see how many's count is 2
+        if char_count.iter().any(|(&c,n)| *n == 2) {
+            twos += 1;
+        }
+        //check to see how many's count is 3
+        if char_count.iter().any(|(&c,n)| *n == 3) {
+            threes += 1;
+        }
     }
-    println!("Part1: {}",num);
-    Ok(num)
+    let check_sum = twos * threes;
+    dbg!(check_sum);
+    Ok(1)
 
 }
 
 fn part2(input: &str) -> Result<i32> {
-    let mut freq:i32 = 0;
-    let mut seen = HashSet::new();
-    seen.insert(freq);
-    loop{
-        print!("loop ");    
-        for line in input.lines(){
-            let change: i32 = line.parse()?;
-            freq+=change;
-            if seen.contains(&freq){
-                println!("Part2: {}",freq);
-                return Ok(freq);
-            }
-            seen.insert(freq);
-        }
-    }
-    Err(From::from("never found a repeat"))
+    
+    
+    Ok(1)
 }
 
 
 pub fn run(config: Config) -> Result<()> {
-    println!("Day1:");
-    part1(&(config.contents));
-    part2(&(config.contents)); 
+    println!("Day2:");
+    part1(&(config.contents))?;
+    part2(&(config.contents))?; 
     Ok(())
 }
 
@@ -48,17 +50,11 @@ mod tests {
     use super::*;
     #[test]
     fn part1() {
-        let input = "-1\n0\n2\n3"; //4
-        let result = super::part1(input).unwrap();
-        dbg!(result);
-        assert_eq!(4,result);
+        assert_eq!(4,2+2);
     }
     #[test]
     fn part2() {
-        let input = "-1\n0\n1\n3"; //4
-        dbg!(input);
-        let result = super::part2(input).unwrap();
-        assert_eq!(-1,result);
+        assert_eq!(4,2+2);
     }
 
 }
