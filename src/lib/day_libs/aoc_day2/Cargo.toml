@@ -5,4 +5,5 @@ authors = ["alex <hortinstein@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+difference = "2.0"
 common = {path = "../../common"}
