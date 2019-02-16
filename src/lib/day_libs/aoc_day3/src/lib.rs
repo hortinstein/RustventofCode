@@ -1,11 +1,13 @@
 use common::Config;
 use std::collections::HashMap;
+use regex::Regex;
 //use std::io::{self, Read, Write};
 
 type Result<T> = ::std::result::Result<T, Box<::std::error::Error>>;
 
 type Fabric = HashMap<(u32, u32), u32>;
 
+#[derive(Debug)]
 struct Patch {
     id: u32,
     x: u32,
@@ -15,21 +17,27 @@ struct Patch {
 }
 
 fn parse_input(input: &str) -> Patch {
-    let mut split = input.split(" ");
+    let RE: Regex = Regex::new( r"(?x)
+                                \#
+                                (?P<id>[0-9]+)
+                                \s+@\s+
+                                (?P<x>[0-9]+),(?P<y>[0-9]+):
+                                \s+
+                                (?P<width>[0-9]+)x(?P<height>[0-9]+)
+                                ").unwrap();
     
-    let id = (&split.next().unwrap()[1..]).parse().unwrap();
-    &split.next().unwrap();
-    let x_y = &(&split.next().unwrap().split(",")).collect();
-    
-    
-    dbg!(&(&split.next().unwrap().split(",")));
-    Patch {
-        id:id,
-        x:0,
-        y:0,
-        width:0,
-        height:0,
-    }
+
+        let caps = match RE.captures(input) {
+            None => panic!("cannot tell format"),
+            Some(caps) => caps,
+        };
+        Patch {
+            id: caps["id"].parse().unwrap(),
+            x: caps["x"].parse().unwrap(),
+            y: caps["y"].parse().unwrap(),
+            width: caps["width"].parse().unwrap(),
+            height: caps["height"].parse().unwrap(),
+        }
 }
 
 fn part1(input: &str) -> Result<i32> {
@@ -37,6 +45,7 @@ fn part1(input: &str) -> Result<i32> {
     let fabric = Fabric::new();
     for line in input.lines(){
         let patch = parse_input(line);
+        dbg!(patch);
     }
 
     Ok(1)
