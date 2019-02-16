@@ -13,7 +13,7 @@ fn main() {
 
     let mut input_str = String::from("src/lib/day_libs/aoc_day");
     input_str.push_str(&args[1]);
-    input_str.push_str("/input/input.txt");    
+    input_str.push_str("/input/input.txt");
 
     args_ref.push(&input_str);
     let config = Config::new(&args_ref).unwrap_or_else(|err| {
