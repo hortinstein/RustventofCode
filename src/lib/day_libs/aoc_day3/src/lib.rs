@@ -44,8 +44,13 @@ fn parse_input(input: &str) -> Patch {
 
 fn part1(input: &str) -> Result<i32> {
     let fabric = Fabric::new();
+    let mut patches:Vec<Patch> = vec![];
     for line in input.lines() {
         let patch = parse_input(line);
+        patches.push(patch);
+    }
+    for patch in &patches{
+        
     }
 
     Ok(1)
